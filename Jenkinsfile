@@ -12,12 +12,12 @@ pipeline {
         }
         stage ("Clone repo"){
             steps {
-                sh "git clone https://github.com/alahammami2/backend_jenkins.git"
+                sh "git clone https://github.com/alahammami2/back-sonar.git"
             }
         }
          stage("Build"){
       steps{
-        dir("front-sonar"){
+        dir("back-sonar"){
           sh "mvn clean install"
         }
       }
@@ -26,7 +26,7 @@ pipeline {
     stage("SonarQube Analysis"){
       steps{
         withSonarQubeEnv("sonar-server"){
-          dir ("front-sonar"){
+          dir ("back-sonar"){
             sh 'mvn sonar:sonar'
                 }                
             }
